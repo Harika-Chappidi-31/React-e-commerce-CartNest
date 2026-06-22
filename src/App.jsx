@@ -80,7 +80,7 @@ function App() {
         />
 
         <Route 
-         path="/forgotpassword"
+         path="/ForgotPassword"
          element={<ForgotPassword />}
         />
         <Route
