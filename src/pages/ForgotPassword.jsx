@@ -11,17 +11,13 @@ function ForgotPassword() {
       const res = await axios.post(
         "https://januecom.duckdns.org/api/forgotpassword",
         {
-          email
+          email,
         }
       );
 
       alert(res.data.message);
-
     } catch (error) {
-      alert(
-        error.response?.data?.message ||
-        "Something went wrong"
-      );
+      alert(error.response?.data?.message || "Something went wrong");
     }
   }
 
@@ -48,17 +44,16 @@ function ForgotPassword() {
 
         .forgot-title{
           text-align:center;
-          font-size:36px;
+          font-size:38px;
           font-weight:bold;
           color:#0f172a;
           margin-bottom:30px;
         }
 
-        .forgot-label{
-          font-weight:600;
-          color:#334155;
-          margin-bottom:8px;
-          display:block;
+        .forgot-text{
+          text-align:center;
+          color:#64748b;
+          margin-bottom:25px;
         }
 
         .forgot-input{
@@ -92,28 +87,30 @@ function ForgotPassword() {
         }
 
         @media(max-width:768px){
+
           .forgot-card{
             padding:25px;
           }
 
           .forgot-title{
-            font-size:28px;
+            font-size:30px;
           }
         }
       `}</style>
 
       <div className="forgot-page">
+
         <div className="forgot-card">
 
-          <h2 className="forgot-title">
+          <h1 className="forgot-title">
             Forgot Password
-          </h2>
+          </h1>
+
+          <p className="forgot-text">
+            Enter your registered email address
+          </p>
 
           <form onSubmit={sendLink}>
-
-            <label className="forgot-label">
-              Email Address
-            </label>
 
             <input
               type="email"
@@ -134,6 +131,7 @@ function ForgotPassword() {
           </form>
 
         </div>
+
       </div>
     </>
   );
