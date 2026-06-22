@@ -1,0 +1,290 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
+function Navbar() {
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const [admin, setAdmin] = useState(null);
+  const [user, setUser] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const adminString = localStorage.getItem("admin");
+    const userString = localStorage.getItem("user") ;
+    let adminData = null;
+    let userData = null;
+    if (adminString && adminString !=="undefined"){
+      adminData = JSON.parse(adminString);
+    }
+    if (userString && userString !=="undefined"){
+      userData = JSON.parse(userString);
+    }
+
+    setAdmin(adminData);
+    setUser(userData);
+  }, [location]);
+
+  function handleSearch(e) {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/produce?search=${encodeURIComponent(searchTerm.trim())}`);
+      setSearchTerm("");
+    }
+  }
+
+
+
+  async function logout() {
+    try {
+      if (admin) {
+        localStorage.removeItem("admin");
+      }
+
+      if (user) {
+        await fetch(
+          "http://127.0.0.1:5000/api/user/logout",
+          {
+            method:"POST",
+            credentials: "include",
+            headers:{
+              "Content-Type":"application/json"
+            }
+          }
+        );
+
+        localStorage.removeItem("user");
+      }
+
+      setAdmin(null);
+      setUser(null);
+
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return (
+    <nav className="navbar navbar-expand-lg custom-navbar">
+      <div className="container-fluid">
+
+        {/* LOGO */}
+        <Link className="navbar-brand logo-text" to="/">
+          CartNest
+        </Link>
+        {/* SEARCH BAR */}
+      <form className="navbar-search-form" onSubmit={handleSearch}>
+        <input
+          id="navbar-search-input"
+          type="text"
+          className="navbar-search-input"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button
+          type="submit"
+          className="navbar-search-btn"
+          aria-label="Search"
+        >
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+        
+        {/* MOBILE BUTTON */}
+        <button
+          className="navbar-toggler bg-light"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+        >
+          <span className="navbar-toggler-icon">
+            <i className="fa-solid fa-bars mt-1"></i>
+          </span>
+        </button>
+
+        {/* NAVBAR LINKS */}
+        <div
+          className="collapse navbar-collapse justify-content-end"
+          id="navbarSupportedContent"
+        >
+          <ul className="navbar-nav mb-2 mb-lg-0">
+
+            {/* GUEST NAVBAR */}
+            {!admin && !user && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link custom-link" to="/login">
+                    Login
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link custom-link" to="/register">
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
+
+            {/* ADMIN NAVBAR */}
+            {admin && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link custom-link" to="/dashboard">
+                    Dashboard
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link custom-link" to="/products">
+                    Products
+                  </Link>
+                </li>
+
+                <li className="nav-item dropdown">
+                  <span
+                    className="nav-link dropdown-toggle custom-link"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    style={{ cursor: "pointer" }}
+                  >
+                    Admin
+                  </span>
+
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/add-product"
+                      >
+                        Add Product
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/admin-products"
+                      >
+                        Admin Products
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+
+                <li className="nav-item">
+                  <button
+                    className="logout-btn"
+                    onClick={logout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
+
+            {/* USER NAVBAR */}
+            {user && (
+              <>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link custom-link"
+                    to="/user-dashboard"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link
+                    className="nav-link custom-link"
+                    to="/produce"
+                  >
+                    Products
+                  </Link>
+                </li>
+
+                {/* CATEGORIES DROPDOWN */}
+                <li className="nav-item dropdown">
+                  <span
+                    className="nav-link dropdown-toggle custom-link"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    style={{ cursor: "pointer" }}
+                  >
+                    Categories
+                  </span>
+                  <ul className="dropdown-menu dropdown-menu-dark-custom">
+                    <li>
+                      <Link className="dropdown-item" to="/produce?category=home_appliences">
+                        🏠 Home Appliances
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/produce?category=Grocery">
+                        🛒 Grocery
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/produce?category=Fashion">
+                        👗 Fashion
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/produce?category=Electronics">
+                        📱 Electronics
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/produce?category=Sports">
+                        ⚽ Sports
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/produce?category=toys">
+                        🧸 Toys
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+
+                <li className="nav-item">
+                  <Link
+                    className="nav-link custom-link"
+                    to="/cart"
+                  >
+                    Cart
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link
+                    className="nav-link custom-link"
+                    to="/my-orders"
+                  >
+                    Orders
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <button
+                    className="logout-btn"
+                    onClick={logout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
