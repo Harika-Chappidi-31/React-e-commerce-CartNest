@@ -29,8 +29,8 @@ function Register() {
   });
   const url =
     role === "admin"
-      ? "http://127.0.0.1:5000/api/admin/register"
-      : "http://127.0.0.1:5000/api/user/register";
+      ? "https://januecom.duckdns.org/api/admin/register"
+      : "https://januecom.duckdns.org/api/user/register";
 
   const payload =
     role === "admin"
@@ -83,8 +83,8 @@ function Register() {
   try {
     const url =
       role === "admin"
-        ? "http://127.0.0.1:5000/api/admin/register"
-        : "http://127.0.0.1:5000/api/user/register";
+        ? "https://januecom.duckdns.org/api/admin/register"
+        : "https://januecom.duckdns.org/api/user/register";
 
     const payload =
       role === "admin"

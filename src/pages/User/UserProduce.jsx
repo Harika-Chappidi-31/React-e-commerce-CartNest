@@ -84,7 +84,7 @@ function UserProduce() {
     const quantity = qtyMap[itemid] || 1;
 
     const res = await axios.post(
-      "http://127.0.0.1:5000/api/cart/add",
+      "https://januecom.duckdns.org/api/cart/add",
       { itemid, quantity },
       { withCredentials: true }
     );
@@ -105,7 +105,7 @@ async function handleBuyNow(product) {
     const quantity = qtyMap[product.itemid] || 1;
 
     const res = await axios.post(
-      "http://127.0.0.1:5000/api/buy_now",
+      "https://januecom.duckdns.org/api/buy_now",
       {
         itemid: product.itemid,
         quantity: quantity
@@ -129,7 +129,7 @@ async function handleBuyNow(product) {
     }
 
       // 👉 OR if you want backend redirect:
-      // window.location.href = `http://127.0.0.1:5000${res.data.next_url}`;
+      // window.location.href = `https://januecom.duckdns.org${res.data.next_url}`;
 
   } catch (error) {
     alert(error.response?.data?.message || "Payment failed");

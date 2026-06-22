@@ -55,8 +55,8 @@ function Login() {
     try {
       const url =
         role === "admin"
-          ? "http://127.0.0.1:5000/api/admin/login"
-          : "http://127.0.0.1:5000/api/user/login";
+          ? "https://januecom.duckdns.org/api/admin/login"
+          : "https://januecom.duckdns.org/api/user/login";
 
       const payload =
         role === "admin"

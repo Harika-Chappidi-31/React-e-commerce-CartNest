@@ -14,7 +14,7 @@ function Cart() {
     try {
       setLoading(true);
       const res = await axios.get(
-        "http://127.0.0.1:5000/api/cart/view",
+        "https://januecom.duckdns.org/api/cart/view",
         { withCredentials: true }
       );
       setCartItems(res.data.cart_items || []);
@@ -38,7 +38,7 @@ function Cart() {
       if (!itemid)return;
       if (quantity<1)return;
       await axios.put(
-        "http://127.0.0.1:5000/api/cart/update",
+        "https://januecom.duckdns.org/api/cart/update",
         {
           itemid,
           quantity:Number(quantity)
@@ -55,7 +55,7 @@ function Cart() {
   async function removeItem(itemid) {
     try {
       await axios.delete(
-        `http://127.0.0.1:5000/api/cart/remove/${itemid}`,
+        `https://januecom.duckdns.org/api/cart/remove/${itemid}`,
         { withCredentials: true }
       );
       fetchCart();

@@ -72,7 +72,7 @@ function AddProduct() {
       data.append("file", file);
 
       const res = await axios.post(
-        "http://127.0.0.1:5000/api/admin/add-item",
+        "https://januecom.duckdns.org/api/admin/add-item",
         data,
         {
           withCredentials: true,

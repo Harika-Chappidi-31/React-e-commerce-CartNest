@@ -44,7 +44,7 @@ function Navbar() {
 
       if (user) {
         await fetch(
-          "http://127.0.0.1:5000/api/user/logout",
+          "https://januecom.duckdns.org/api/user/logout",
           {
             method:"POST",
             credentials: "include",
