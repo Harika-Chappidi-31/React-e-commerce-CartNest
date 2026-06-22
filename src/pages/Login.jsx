@@ -343,6 +343,12 @@ function Login() {
 
           </form>
 
+          <div className="text-center mt-3">
+            <Link to="/ForgotPassword">
+             Forgot Password?
+            </Link>
+          </div>
+
           <div className="register-link">
             Don’t have an account?{" "}
             <Link to="/register">

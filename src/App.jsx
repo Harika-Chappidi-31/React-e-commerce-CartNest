@@ -5,6 +5,8 @@ import Products from './pages/Products'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import VerifyOtp from './pages/VerifyOtp'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword';
 import Navbar from './pages/Navbar'
 import ProtectedRoute from './pages/ProtectedRoute'
 import Dashboard from './pages/Dashboard'
@@ -75,6 +77,15 @@ function App() {
         <Route
           path="/verify-otp"
           element={<VerifyOtp />}
+        />
+
+        <Route 
+         path="/forgotpassword"
+         element={<ForgotPassword />}
+        />
+        <Route
+         path="/reset-password/:token"
+         element={<ResetPassword />}
         />
 
         {/* ADMIN ROUTES */}
@@ -182,6 +193,7 @@ function App() {
           }
         />
       </Routes>
+      
 
 
     </BrowserRouter>

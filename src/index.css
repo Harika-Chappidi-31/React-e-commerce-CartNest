@@ -82,3 +82,35 @@
 .navbar-nav {
   align-items: center;
 }
+@media (max-width: 768px) {
+
+  .custom-navbar {
+    padding: 12px;
+  }
+
+  .logo-text {
+    font-size: 28px !important;
+  }
+
+  .navbar-search-form {
+    width: 100%;
+    margin: 10px 0;
+    order: 3;
+  }
+
+  .navbar-search-input {
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    margin-left: auto;
+  }
+  .container-fluid{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .navbar-search-btn{
+    flex-shrink: 0;
+  }
+
+}
