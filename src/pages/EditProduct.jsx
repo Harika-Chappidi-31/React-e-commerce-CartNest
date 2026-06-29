@@ -52,7 +52,7 @@ function EditProduct() {
       );
       console.log("EDIT PRODUCT RESPONSE 👉", res.data);
 
-      const p = res.data.item[0];   // ✅ TAKE FIRST OBJECT FROM ARRAY
+      const p = res.data.products;   // ✅ TAKE FIRST OBJECT FROM ARRAY
       
       if(!p){
         showBootstrapToast("Product not found", "danger");
