@@ -60,7 +60,7 @@ function EditProduct() {
       }
 
       setFormData({
-        title: p.item_name ||"",
+        title: p.itemname ||"",
         Description: p.item_desc||"",
         About_item: p.item_about||"",
         quantity: p.quantity||"",
