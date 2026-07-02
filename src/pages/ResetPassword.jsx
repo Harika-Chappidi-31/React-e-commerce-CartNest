@@ -13,7 +13,7 @@ function ResetPassword() {
     confirm_password: ""
   });
 
-  function handleChange(e) {
+  function handleChange(e) { 
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
