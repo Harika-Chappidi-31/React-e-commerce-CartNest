@@ -80,11 +80,11 @@ function App() {
         />
 
         <Route 
-         path="/ForgotPassword"
+         path="/forgotpassword"
          element={<ForgotPassword />}
         />
         <Route
-         path="/reset-password/:token"
+         path="/resetpassword/:token"
          element={<ResetPassword />}
         />
 
